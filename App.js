@@ -5,8 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 
 import HomeScreen from './src/screens/Home';
-import LoginScreen from './src/screens/Login';
 import ChatScreen from './src/screens/Chat';
+import CadastroScreen from './src/screens/Cadastro';
+import LoginScreen from './src/screens/Login';
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -19,8 +20,9 @@ export default function App() {
         <StatusBar hidden={true}/>
           <Stack.Navigator screenOptions={{ headerShown: false}}>
               <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Login" component={LoginScreen} />
               <Stack.Screen name="Chat" component={ChatScreen} />
+              <Stack.Screen name="Cadastro" component={CadastroScreen} />
+              <Stack.Screen name="Login" component={LoginScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

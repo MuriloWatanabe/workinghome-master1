@@ -20,16 +20,18 @@ export default function Cadastro ({ navigation }) {
               marginTop: 15,
               marginBottom: 15,
             }}> 
-              Login 
+              Cadastre-se 
           </Text>
         </View>
       <Card mode='contained' style={styles.card}>
         <View>
+          <TextInput type="text" name="name" placeholder='  Nome:' placeholderTextColor="#9F9F9F" style={styles.input}/>
           <TextInput type="email" name="email" placeholder='  Email:' placeholderTextColor="#9F9F9F" style={styles.input}/>
           <TextInput type="password" name="senha" placeholder='  Senha:' placeholderTextColor="#9F9F9F" style={styles.input}/>
+          <TextInput type="password" name="Confirme-Senha" placeholder='  Confirme a senha:' placeholderTextColor="#9F9F9F" style={styles.input}/>      
         </View>
           <View style={{alignItems: 'center', paddingTop: 5, paddingBottom: 15,}}>
-            <Text style={{color: '#837F7F',}}>---------- Outras maneiras de Login ----------</Text>
+            <Text style={{color: '#837F7F',}}>---------- Outras maneiras de cadastro ----------</Text>
           </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly',}}>
           <Image source={Facebook} style={styles.image}>
@@ -39,7 +41,7 @@ export default function Cadastro ({ navigation }) {
         </View>
         <View style={{alignItems: 'center', margin: 10, }}>
           <Text style={{color: '#837F7F'}}>
-            Não possui conta?
+            Já possui conta?
             <Text style={styles.link} onPress={() => navigation.navigate('Login')}>
               Clique Aqui
             </Text> 

@@ -19,6 +19,9 @@ export default function HomeScreen ({ navigation }) {
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Chat")}><Text>Chat</Text></TouchableOpacity>
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
+        <Text>Login</Text>
+      </TouchableOpacity>
       <View style={styles.header}>
         <Image source={Ger} style={styles.ger}></Image>
         <Text style={styles.nome}>Dna. Gertrudes</Text>
