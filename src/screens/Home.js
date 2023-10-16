@@ -13,11 +13,11 @@ import Stars from "../../icons/estrelas.png";
 import fot from "../../icons/limpeza1.jpeg"
 import fot2 from "../../icons/limpeza2.jpeg"
 
-const HomeScreen = ({}) => {
+const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <View>
-        <TouchableOpacity><Text>Chat</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Chat")}><Text>Chat</Text></TouchableOpacity>
       </View>
       <View style={styles.header}>
         <Image source={Ger} style={styles.ger}></Image>
