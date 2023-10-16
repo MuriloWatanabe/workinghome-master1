@@ -13,7 +13,7 @@ import Stars from "../../icons/estrelas.png";
 import fot from "../../icons/limpeza1.jpeg"
 import fot2 from "../../icons/limpeza2.jpeg"
 
-const HomeScreen = ({ navigation }) => {
+export default function HomeScreen ({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -228,8 +228,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
-// display: 'flex',
-// flexDirection: 'column',
-// justifyContent: 'center',
-// alignItems: 'center',
+
