@@ -16,6 +16,9 @@ import fot2 from "../../icons/limpeza2.jpeg"
 const HomeScreen = ({}) => {
   return (
     <ScrollView style={styles.container}>
+      <View>
+        <TouchableOpacity><Text>Chat</Text></TouchableOpacity>
+      </View>
       <View style={styles.header}>
         <Image source={Ger} style={styles.ger}></Image>
         <Text style={styles.nome}>Dna. Gertrudes</Text>

@@ -6,6 +6,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 
 import HomeScreen from './src/screens/Home';
 import LoginScreen from './src/screens/Login';
+import ChatScreen from './src/screens/Chat';
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false}}>
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Login" component={ChatScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
