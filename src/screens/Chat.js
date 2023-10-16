@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, View, Image, } from 'react-native';
+import { Text, TextInput, StyleSheet, View, Image, TouchableOpacity, } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
 import Enviar from '../../icons/enviar-mensagem.png'
@@ -7,22 +7,29 @@ import Icone from '../../icons/imagem-do-usuario-com-fundo-preto.png'
 import Google from '../../icons/google.png'
 import Facebook from '../../icons/facebook.png'
 
+
 export default function Chat ({ navigation }) {
   return (
     <View style={styles.container}>
-          <Image source={Icone} style={styles.icone}></Image>
+      <Card style={styles.card}>
+      <TouchableOpacity onPress={() => navigation.navigate("Home")} style={styles.icone}>
+           <Image source={Icone} style={styles.icone}></Image>
+        </TouchableOpacity>
+            </Card>
           <View >
-        <View style={styles.barmen}>
-          <TextInput type="email" name="fale" placeholder="bla" style={styles.text}/>
-          <Button mode="elevated" onPress={() => navigation.navigate('Home')} style={styles.botao}>
-          <Image source={Enviar} style={styles.ger}></Image>
-          </Button>
-        </View>
-        </View>
-      <View>
-        <TextInput></TextInput>
-      </View>
+         <View style={styles.barmen}>
+            <TextInput type="email" name="fale" placeholder="Enviar mensagem" style={styles.text}/>      
+          <View>
+         <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={styles.botao}>
+            <Image source={Enviar}></Image>
+          </TouchableOpacity>
+       </View>
+     </View>
     </View>
+    <View>
+      <TextInput></TextInput>
+    </View>
+  </View>
   );
 }
 
@@ -34,31 +41,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 
-  image:{
-    paddingLeft: 10,
-    height: 80,
-    width: 80,
-  },
 icone:{
-  width: 20,
-  height:10,
+  width: 60,
+  height:60,
+  marginLeft: 5,
 },
-  card: {
-    backgroundColor: '#FFFFFF',
-    width: '50%',
-    height: '50%',
-    padding: 10,
-    marginTop: 10,
-  },
-
-  titleContainer: {
-    alignItems: 'center',
-  },
-
-  title: {
-    fontWeight: 'bold',
-    color: '#FF5F0F',
-  },
 
   input: {
     backgroundColor: 'white',
@@ -69,30 +56,40 @@ icone:{
 
   botao: {
     width: 10,
-  },
-
-  link: {
-    color: '#FF5F0F',
+    height: 10,
+    backgroundColor:"#CEC8C8",
+    margin: 60,
+    marginLeft:10,
   },
 
   barmen: {
-  backgroundColor: 'blue',
-  color:'black',
+  backgroundColor: 'white',
   justifyContent: "space-evenly",
   flexDirection: "row",
-  height: 40,
+  height: 45,
   alignItems: "center",
-  marginTop:732,
+  marginTop:640,
 },
+
   text:{ 
-    backgroundColor: 'white',
-    borderRadius: 12,
+    backgroundColor: '#CEC8C8',
+    borderRadius: 10,
     margin: 10,
     width: 200,
+    height: 30,
   },
 
-  bola: {
-    width: "10%",
-    borderRadius: 20,
+  card:{ 
+    backgroundColor: "#3B8AEB",
+    width: '100%',
+    height: '10%',
+    marginTop: -10,
+    marginBottom: 23,
+    borderRadius: -1,
   },
+  Enviar:{
+    width: 2,
+    height: 1,
+  },
+
 });
