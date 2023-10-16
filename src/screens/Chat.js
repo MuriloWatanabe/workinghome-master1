@@ -2,28 +2,23 @@ import React from 'react';
 import { Text, TextInput, StyleSheet, View, Image, } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
-import Logo from '../../icons/logoazultrans.png'
+import Enviar from '../../icons/enviar-mensagem.png'
+import Icone from '../../icons/imagem-do-usuario-com-fundo-preto.png'
 import Google from '../../icons/google.png'
 import Facebook from '../../icons/facebook.png'
 
 export default function Chat ({ navigation }) {
   return (
     <View style={styles.container}>
-        <Image source={Logo} style={styles.image}>
-        </Image>
-        <View style={styles.titleContainer}>
-        </View>
-      <Card style={styles.card}>
-        
-        <View >
-          <TextInput type="email" name="fale" style={styles.input}/>
-        </View>
-        <View style={{alignItems: 'center',}}>
+          <Image source={Icone} style={styles.icone}></Image>
+          <View >
+        <View style={styles.barmen}>
+          <TextInput type="email" name="fale" placeholder="bla" style={styles.text}/>
           <Button mode="elevated" onPress={() => navigation.navigate('Home')} style={styles.botao}>
-            <Text style={{color: '#FF5F0F',}}>Enviar</Text>
+          <Image source={Enviar} style={styles.ger}></Image>
           </Button>
         </View>
-      </Card>
+        </View>
       <View>
         <TextInput></TextInput>
       </View>
@@ -44,7 +39,10 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
   },
-
+icone:{
+  width: 20,
+  height:10,
+},
   card: {
     backgroundColor: '#FFFFFF',
     width: '50%',
@@ -63,18 +61,38 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: '#EEEEEE',
+    backgroundColor: 'white',
     borderRadius: 12,
     margin: 10,
-    width: '90%',
+    width: '100%',
   },
 
   botao: {
-    width: 130,
-    backgroundColor: '#6304AE',
+    width: 10,
   },
 
   link: {
     color: '#FF5F0F',
+  },
+
+  barmen: {
+  backgroundColor: 'blue',
+  color:'black',
+  justifyContent: "space-evenly",
+  flexDirection: "row",
+  height: 40,
+  alignItems: "center",
+  marginTop:732,
+},
+  text:{ 
+    backgroundColor: 'white',
+    borderRadius: 12,
+    margin: 10,
+    width: 200,
+  },
+
+  bola: {
+    width: "10%",
+    borderRadius: 20,
   },
 });
