@@ -1,11 +1,9 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, View, Image, TouchableOpacity, } from 'react-native';
-import { Button, Card } from 'react-native-paper';
+import {  TextInput, StyleSheet, View, Image, TouchableOpacity, } from 'react-native';
+import {  Card } from 'react-native-paper';
 
 import Enviar from '../../icons/enviar-mensagem.png'
 import Icone from '../../icons/imagem-do-usuario-com-fundo-preto.png'
-import Google from '../../icons/google.png'
-import Facebook from '../../icons/facebook.png'
 
 
 export default function Chat ({ navigation }) {
@@ -21,7 +19,7 @@ export default function Chat ({ navigation }) {
             <TextInput type="email" name="fale" placeholder="Enviar mensagem" style={styles.text}/>      
           <View>
          <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={styles.botao}>
-            <Image source={Enviar}></Image>
+            <Image source={Enviar} style={{height: 30, width:30}}></Image>
           </TouchableOpacity>
        </View>
      </View>
@@ -55,11 +53,14 @@ icone:{
   },
 
   botao: {
-    width: 10,
-    height: 10,
+    width: 50,
+    height: 50,
     backgroundColor:"#CEC8C8",
     margin: 60,
     marginLeft:10,
+    borderRadius:25,
+    alignItems: "center",
+    justifyContent:"center"
   },
 
   barmen: {
@@ -86,10 +87,6 @@ icone:{
     marginTop: -10,
     marginBottom: 23,
     borderRadius: -1,
-  },
-  Enviar:{
-    width: 2,
-    height: 1,
   },
 
 });

@@ -32,9 +32,9 @@ export default function Cadastro ({ navigation }) {
             <Text style={{color: '#837F7F',}}>---------- Outras maneiras de Login ----------</Text>
           </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly',}}>
-          <Image source={Facebook} style={styles.image}>
+          <Image source={Facebook} style={{width: 45,height: 45,}}>
           </Image>
-          <Image source={Google} style={styles.image}>
+          <Image source={Google} style={{width: 45,height: 45,}}>
           </Image>
         </View>
         <View style={{alignItems: 'center', margin: 10, }}>
@@ -75,11 +75,6 @@ const styles = StyleSheet.create({
   logo: {
     height: 180,
     width: 180,
-  },
-
-  image: {
-    width: 35,
-    height: 35,
   },
 
   card: {

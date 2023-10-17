@@ -10,18 +10,23 @@ import {
 
 import Ger from "../../icons/gertrudes.png";
 import Stars from "../../icons/estrelas.png";
-import fot from "../../icons/limpeza1.jpeg"
-import fot2 from "../../icons/limpeza2.jpeg"
+import fot from "../../icons/limpeza1.jpeg";
+import fot2 from "../../icons/limpeza2.jpeg";
+import chat from "../../icons/bate-papo.png";
 
-export default function HomeScreen ({ navigation }) {
+export default function HomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
-      <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Chat")}><Text>Chat</Text></TouchableOpacity>
+      <View style={styles.nav}>
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
+            <Image source={chat} style={{width:50, height:50}}></Image>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
+          <Text style={{color: "#3b8aeb", fontWeight: "800", fontSize: 15}}>Login</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
-        <Text>Login</Text>
-      </TouchableOpacity>
       <View style={styles.header}>
         <Image source={Ger} style={styles.ger}></Image>
         <Text style={styles.nome}>Dna. Gertrudes</Text>
@@ -86,15 +91,15 @@ export default function HomeScreen ({ navigation }) {
         </View>
         <View style={styles.a}>
           <Text style={{ marginLeft: 5 }}>Limpeza simples</Text>
-          <Text style={{ marginRight: 5 }}>R$110,00</Text>
+          <Text style={{ marginRight: 5, color:"#3b8aeb", fontWeight: "700" }}>R$110,00</Text>
         </View>
         <View style={styles.b}>
           <Text style={{ marginLeft: 5 }}>Limpeza completa</Text>
-          <Text style={{ marginRight: 5 }}>R$150,00</Text>
+          <Text style={{ marginRight: 5, color:"#3b8aeb", fontWeight: "700" }}>R$150,00</Text>
         </View>
         <View style={styles.a}>
           <Text style={{ marginLeft: 5 }}>Limpeza completa + área externa</Text>
-          <Text style={{ marginRight: 5 }}>R$200,00</Text>
+          <Text style={{ marginRight: 5, color:"#3b8aeb", fontWeight: "700" }}>R$200,00</Text>
         </View>
       </View>
       <View style={styles.imagens}>
@@ -113,14 +118,14 @@ export default function HomeScreen ({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-          <View style={styles.fotos}>
-            <Image source={fot} styles={{height:100,width:50}}></Image>
-            <Image source={fot2} styles={{height:500,width:50}}></Image>
-          </View>
+        <View style={styles.fotos}>
+          <Image source={fot} styles={{ height: 500, width: 500 }}></Image>
+          <Image source={fot2} styles={{ height: 500, width: 50 }}></Image>
+        </View>
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -220,15 +225,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   imagens: {
-    marginTop:15,
+    marginTop: 15,
   },
   fotos: {
     marginTop: 30,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent:'center',
+    justifyContent: "center",
+  },
+  nav: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
-
-
