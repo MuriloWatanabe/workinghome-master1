@@ -1,82 +1,101 @@
-import React from "react";
-import {
-  TextInput,
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import { Card } from "react-native-paper";
+import React, { Component } from "react";
+import { View, Text, TextInput, Button, FlatList, Image, TouchableOpacity} from "react-native";
 
-import Enviar from "../../icons/enviar-mensagem.png";
-import Icone from "../../icons/imagem-do-usuario-com-fundo-preto.png";
+import user from "../../icons/usuario.png";
+import Voltar from "../../icons/voltar.png";
 
-export default function Chat({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Card style={styles.card}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
-          style={styles.icone}
+class ChatScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      text: "",
+      recipientName: "Cliente", // Nome da pessoa para quem você está enviando mensagens
+    };
+  }
+
+  // Função para enviar uma mensagem
+  sendMessage = () => {
+    if (this.state.text !== "") {
+      const newMessage = {
+        id: this.state.messages.length + 1,
+        text: this.state.text,
+        sender: "Me", // Pode ser 'Me' ou 'Other' dependendo do remetente
+      };
+      this.setState((prevState) => ({
+        messages: [...prevState.messages, newMessage],
+        text: "",
+      }));
+    }
+  };
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <View
+          style={{
+            padding: 10,
+            backgroundColor: "#3b8aeb",
+            height: 80,
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "row",
+          }}
         >
-          <Image source={Icone} style={styles.icone}></Image>
-        </TouchableOpacity>
-      </Card>
-      <View>
-        <View style={styles.barmen}>
-          <View style={styles.text}>
-            <TextInput
-              placeholder="Mensagem"
-              type="text"
-              name="fale"
-              style={{ width: 300, height: 30, backgroundColor: "grey", borderRadius:25, color: "white" }}
-            ></TextInput>
-          </View>
-          <TouchableOpacity>
-            <View style={styles.botao}>
-              <Image source={Enviar} style={{ height: 30, width: 30 }}></Image>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <Image
+                style={{ height: 25, width: 25, marginRight: 10 }}
+                source={Voltar}
+              ></Image>
+            </TouchableOpacity>
+          <Image source={user} style={{ height: 40, width: 40 }}></Image>
+          <Text style={{ fontSize: 20, color: "white", marginLeft: 5}}>
+            {this.state.recipientName}
+          </Text>
+        </View>
+        <FlatList
+          data={this.state.messages}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                padding: 10,
+                backgroundColor: item.sender === "Me" ? "#3b8aeb" : "white",
+                alignSelf: item.sender === "Me" ? "flex-end" : "flex-start",
+                borderRadius: 5,
+                margin: 5,
+                maxWidth: "70%",
+              }}
+            >
+              <Text
+                style={{
+                  color: "black",
+                  fontSize: 20,
+                }}
+              >
+                {item.text}
+              </Text>
             </View>
-          </TouchableOpacity>
+          )} style={{marginTop:30}}
+        />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <TextInput
+            style={{
+              flex: 1,
+              borderWidth: 1,
+              borderColor: "#ccc",
+              borderRadius: 5,
+              padding: 10,
+            }}
+            placeholder="Digite uma mensagem"
+            value={this.state.text}
+            onChangeText={(text) => this.setState({ text })}
+          />
+          <Button title="Enviar" onPress={this.sendMessage} />
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 10,
-    backgroundColor: "white",
-  },
-
-  icone: {
-    width: 60,
-    height: 60,
-    marginLeft: 5,
-  },
-
-  input: {
-    backgroundColor: "white",
-    borderRadius: 12,
-    margin: 10,
-    width: "100%",
-  },
-
-  barmen: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 640,
-    justifyContent: "center",
-  },
-
-  card: {
-    backgroundColor: "#3B8AEB",
-    width: "100%",
-    height: "10%",
-    marginTop: -10,
-    marginBottom: 23,
-    borderRadius: -1,
-  },
-});
+export default ChatScreen;
