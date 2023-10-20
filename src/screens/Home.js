@@ -117,7 +117,7 @@ export default function HomeScreen({ navigation }) {
         </View>
         <View style={styles.fotos}>
           <Image source={fot} styles={{ height: 500, width: 500 }}></Image>
-          <Image source={fot2} styles={{ height: 500, width: 50 }}></Image>
+          <Image source={fot2} styles={{ height: 500, width: 500 }}></Image>
         </View>
       </View>
     </ScrollView>
