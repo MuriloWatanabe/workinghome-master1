@@ -40,7 +40,7 @@ export default function Cadastro ({ navigation }) {
         <View style={{alignItems: 'center', margin: 10, }}>
           <Text style={{color: '#837F7F'}}>
             Não possui conta?
-            <Text style={styles.link} onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.link} onPress={() => navigation.navigate('Cadastro')}>
               Clique Aqui
             </Text> 
           </Text>

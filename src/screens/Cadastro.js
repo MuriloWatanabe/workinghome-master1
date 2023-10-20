@@ -48,7 +48,7 @@ export default function Cadastro ({ navigation }) {
           </Text>
         </View>
         <View style={{alignItems: 'center',}}>
-          <Button mode="elevated" onPress={() => navigation.navigate('Home')} style={styles.botao}>
+          <Button mode="elevated" onPress={() => navigation.navigate('Serviço')} style={styles.botao}>
             <Text style={{color: '#FFF',}}>Enviar!</Text>
           </Button>
         </View>
