@@ -23,9 +23,6 @@ export default function HomeScreen({ navigation }) {
             <Image source={chat} style={{width:50, height:50}}></Image>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
-          <Text style={{color: "#3b8aeb", fontWeight: "800", fontSize: 15}}>Login</Text>
-        </TouchableOpacity>
       </View>
       <View style={styles.header}>
         <Image source={Ger} style={styles.ger}></Image>
@@ -132,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: 16,
-    paddingTop: 50,
+    marginTop:10,  
   },
   header: {
     display: "flex",

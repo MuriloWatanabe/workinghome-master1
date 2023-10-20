@@ -10,17 +10,16 @@ class ChatScreen extends Component {
     this.state = {
       messages: [],
       text: "",
-      recipientName: "Cliente", // Nome da pessoa para quem você está enviando mensagens
+      recipientName: "Cliente", 
     };
   }
 
-  // Função para enviar uma mensagem
   sendMessage = () => {
     if (this.state.text !== "") {
       const newMessage = {
         id: this.state.messages.length + 1,
         text: this.state.text,
-        sender: "Me", // Pode ser 'Me' ou 'Other' dependendo do remetente
+        sender: "Me", 
       };
       this.setState((prevState) => ({
         messages: [...prevState.messages, newMessage],
