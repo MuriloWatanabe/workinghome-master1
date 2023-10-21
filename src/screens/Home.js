@@ -10,6 +10,7 @@ import {
   Button,
   TextInput,
 } from "react-native";
+
 import Ger from "../../icons/gertrudes.png";
 import Stars from "../../icons/estrelas.png";
 import fot from "../../icons/limpeza1.jpeg";
@@ -25,8 +26,11 @@ export default function HomeScreen({ navigation }) {
     descricao: "",
     servico: "",
     valor: "",
-    foto: "",
+    foto: "", 
   });
+  
+  const [database, setDatabase] = useState([
+  ]);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -34,6 +38,52 @@ export default function HomeScreen({ navigation }) {
 
   const handleFormChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
+  };
+
+  const handleAddWorker = () => {
+    const newId = Math.max(...database.map((worker) => worker.id)) + 1;
+
+    const newWorker = {
+      id: newId,
+      ...formData,
+      valor: parseFloat(formData.valor).toFixed(2),
+      idade: formData.idade,
+    };
+
+    setDatabase([...database, newWorker]);
+
+    setFormData({
+      nome: "",
+      idade: "",
+      local: "",
+      descricao: "",
+      servico: "",
+      valor: "",
+      foto: "",
+    });
+
+    toggleModal();
+
+    saveToDatabase(newWorker);
+  };
+
+  const databaseURL = "http://127.0.0.1:8000/people";
+
+  const saveToDatabase = (data) => {
+    fetch(databaseURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Dados enviados com sucesso:", data);
+      })
+      .catch((error) => {
+        console.error("Erro ao enviar dados:", error);
+      });
   };
 
   return (
@@ -44,23 +94,9 @@ export default function HomeScreen({ navigation }) {
             <Image source={chat} style={{ width: 50, height: 50 }} />
           </TouchableOpacity>
         </View>
-        <View>
-          <TouchableOpacity onPress={toggleModal}>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: "#3b8aeb",
-                padding: 10,
-              }}
-            >
-              Adicionar Novo Trabalhador
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
       <View style={styles.header}>
-        <Image source={Ger} style={styles.ger}></Image>
+        <Image source={Ger} style={styles.ger} />
         <Text style={styles.nome}>Dna. Gertrudes</Text>
         <Text style={styles.idade}>72 anos</Text>
         <Text style={styles.dia}>Diarista</Text>
@@ -130,26 +166,37 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.a}>
           <Text style={{ marginLeft: 5 }}>Limpeza simples</Text>
           <Text style={{ marginRight: 5, color: "#3b8aeb", fontWeight: "700" }}>
-            R$110,00
+            R$110.00
           </Text>
         </View>
         <View style={styles.b}>
           <Text style={{ marginLeft: 5 }}>Limpeza completa</Text>
           <Text style={{ marginRight: 5, color: "#3b8aeb", fontWeight: "700" }}>
-            R$150,00
+            R$150.00
           </Text>
         </View>
         <View style={styles.a}>
           <Text style={{ marginLeft: 5 }}>Limpeza completa + área externa</Text>
           <Text style={{ marginRight: 5, color: "#3b8aeb", fontWeight: "700" }}>
-            R$200,00
+            R$200.00
           </Text>
         </View>
       </View>
       <View style={styles.imagens}>
-        <View style={styles.plus}>
-          <Text></Text>
+        <View style={styles.buttonsContainer}>
           <TouchableOpacity onPress={toggleModal}>
+            <Text
+              style={{
+                marginBottom: 3,
+                color: "#3b8aeb",
+                fontSize: 15,
+                fontWeight: "500",
+              }}
+            >
+              + Adicionar novo trabalhador
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
             <Text
               style={{
                 marginBottom: 3,
@@ -176,38 +223,50 @@ export default function HomeScreen({ navigation }) {
               style={styles.input}
               placeholder="Nome"
               onChangeText={(text) => handleFormChange("nome", text)}
+              value={formData.nome}
             />
             <TextInput
               style={styles.input}
               placeholder="Idade"
               onChangeText={(text) => handleFormChange("idade", text)}
+              value={formData.idade}
             />
             <TextInput
               style={styles.input}
               placeholder="Local"
               onChangeText={(text) => handleFormChange("local", text)}
+              value={formData.local}
             />
             <TextInput
               style={styles.input}
               placeholder="Descrição"
               onChangeText={(text) => handleFormChange("descricao", text)}
+              value={formData.descricao}
             />
             <TextInput
               style={styles.input}
               placeholder="Serviço"
               onChangeText={(text) => handleFormChange("servico", text)}
+              value={formData.servico}
             />
             <TextInput
               style={styles.input}
               placeholder="Valor"
               onChangeText={(text) => handleFormChange("valor", text)}
+              value={formData.valor}
             />
             <TextInput
               style={styles.input}
-              placeholder="URL da Foto"
+              placeholder="Nome da Foto (caminho ou URL)"
               onChangeText={(text) => handleFormChange("foto", text)}
+              value={formData.foto}
             />
-            <Button title="Adicionar" onPress={toggleModal} />
+            <Button
+              title="Adicionar"
+              onPress={() => {
+                handleAddWorker();
+              }}
+            />
           </View>
         </ScrollView>
       </Modal>
@@ -307,7 +366,7 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: "center",
   },
-  plus: {
+  buttonsContainer: {
     justifyContent: "space-between",
     display: "flex",
     flexDirection: "row",
@@ -329,21 +388,19 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
     padding: 20,
   },
   formTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 20,
     marginBottom: 10,
   },
   input: {
-    width: "100%",
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
     marginBottom: 10,
-    paddingLeft: 10,
+    padding: 10,
   },
 });
