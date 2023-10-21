@@ -9,23 +9,27 @@ class ChatScreen extends Component {
     super(props);
     this.state = {
       messages: [],
-      text: "",
-      recipientName: "Cliente", 
+      text: '',
+      recipientName: 'Cliente',
     };
   }
 
   sendMessage = () => {
-    if (this.state.text !== "") {
+    if (this.state.text !== '') {
       const newMessage = {
         id: this.state.messages.length + 1,
         text: this.state.text,
-        sender: "Me", 
+        sender: 'Me',
       };
       this.setState((prevState) => ({
         messages: [...prevState.messages, newMessage],
-        text: "",
+        text: '',
       }));
     }
+  };
+
+  navigateToHome = () => {
+    this.props.navigation.navigate('Home');
   };
 
   render() {
@@ -41,7 +45,7 @@ class ChatScreen extends Component {
             flexDirection: "row",
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <TouchableOpacity onPress={this.navigateToHome}>
               <Image
                 style={{ height: 25, width: 25, marginRight: 10 }}
                 source={Voltar}
