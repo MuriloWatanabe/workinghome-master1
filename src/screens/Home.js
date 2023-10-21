@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,10 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Modal,
+  Button,
+  TextInput,
 } from "react-native";
-
 import Ger from "../../icons/gertrudes.png";
 import Stars from "../../icons/estrelas.png";
 import fot from "../../icons/limpeza1.jpeg";
@@ -15,12 +17,45 @@ import fot2 from "../../icons/limpeza2.jpeg";
 import chat from "../../icons/bate-papo.png";
 
 export default function HomeScreen({ navigation }) {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [formData, setFormData] = useState({
+    nome: "",
+    idade: "",
+    local: "",
+    descricao: "",
+    servico: "",
+    valor: "",
+    foto: "",
+  });
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const handleFormChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.nav}>
         <View>
           <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
-            <Image source={chat} style={{width:50, height:50}}></Image>
+            <Image source={chat} style={{ width: 50, height: 50 }} />
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity onPress={toggleModal}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                color: "#3b8aeb",
+                padding: 10,
+              }}
+            >
+              Adicionar Novo Trabalhador
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -36,7 +71,7 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.bla}>
             <Text>5.0</Text>
             <View style={styles.avad}>
-              <Image source={Stars} style={{ height: 20, width: 85 }}></Image>
+              <Image source={Stars} style={{ height: 20, width: 85 }} />
               <Text style={{ fontSize: 10 }}>53 avaliações</Text>
             </View>
           </View>
@@ -73,7 +108,13 @@ export default function HomeScreen({ navigation }) {
           foco naquilo que é visto rapidamente. Mesmo assim, os procedimentos
           envolvem a remoção seca ou molhada da{" "}
           <TouchableOpacity>
-            <Text style={{ color: "#3b8aeb", fontSize: 15, fontWeight: "500" }}>
+            <Text
+              style={{
+                color: "#3b8aeb",
+                fontSize: 15,
+                fontWeight: "500",
+              }}
+            >
               Ver mais
             </Text>
           </TouchableOpacity>
@@ -88,21 +129,27 @@ export default function HomeScreen({ navigation }) {
         </View>
         <View style={styles.a}>
           <Text style={{ marginLeft: 5 }}>Limpeza simples</Text>
-          <Text style={{ marginRight: 5, color:"#3b8aeb", fontWeight: "700" }}>R$110,00</Text>
+          <Text style={{ marginRight: 5, color: "#3b8aeb", fontWeight: "700" }}>
+            R$110,00
+          </Text>
         </View>
         <View style={styles.b}>
           <Text style={{ marginLeft: 5 }}>Limpeza completa</Text>
-          <Text style={{ marginRight: 5, color:"#3b8aeb", fontWeight: "700" }}>R$150,00</Text>
+          <Text style={{ marginRight: 5, color: "#3b8aeb", fontWeight: "700" }}>
+            R$150,00
+          </Text>
         </View>
         <View style={styles.a}>
           <Text style={{ marginLeft: 5 }}>Limpeza completa + área externa</Text>
-          <Text style={{ marginRight: 5, color:"#3b8aeb", fontWeight: "700" }}>R$200,00</Text>
+          <Text style={{ marginRight: 5, color: "#3b8aeb", fontWeight: "700" }}>
+            R$200,00
+          </Text>
         </View>
       </View>
       <View style={styles.imagens}>
         <View style={styles.plus}>
           <Text></Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={toggleModal}>
             <Text
               style={{
                 marginBottom: 3,
@@ -111,15 +158,59 @@ export default function HomeScreen({ navigation }) {
                 fontWeight: "500",
               }}
             >
-              +Adicionar imagens
+              + Adicionar imagens
             </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.fotos}>
-          <Image source={fot} styles={{ height: 500, width: 500 }}></Image>
-          <Image source={fot2} styles={{ height: 500, width: 500 }}></Image>
+          <Image source={fot} style={{ height: 500, width: 500 }} />
+          <Image source={fot2} style={{ height: 500, width: 500 }} />
         </View>
       </View>
+
+      <Modal visible={isModalVisible} animationType="slide">
+        <ScrollView style={{ flex: 1 }}>
+          <View style={styles.formContainer}>
+            <Text style={styles.formTitle}>Adicionar Novo Trabalhador</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Nome"
+              onChangeText={(text) => handleFormChange("nome", text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Idade"
+              onChangeText={(text) => handleFormChange("idade", text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Local"
+              onChangeText={(text) => handleFormChange("local", text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Descrição"
+              onChangeText={(text) => handleFormChange("descricao", text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Serviço"
+              onChangeText={(text) => handleFormChange("servico", text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Valor"
+              onChangeText={(text) => handleFormChange("valor", text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="URL da Foto"
+              onChangeText={(text) => handleFormChange("foto", text)}
+            />
+            <Button title="Adicionar" onPress={toggleModal} />
+          </View>
+        </ScrollView>
+      </Modal>
     </ScrollView>
   );
 }
@@ -129,7 +220,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: 16,
-    marginTop:10,  
+    marginTop: 10,
   },
   header: {
     display: "flex",
@@ -235,5 +326,24 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  formContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  formTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
   },
 });
